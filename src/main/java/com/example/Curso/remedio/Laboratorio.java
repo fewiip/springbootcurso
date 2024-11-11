@@ -1,7 +1,9 @@
 package com.example.Curso.remedio;
 
 public enum Laboratorio {
-	MEDLEY,
-	ACHE,
-	
+	EMS,
+	ACHÉ,
+	EUROFARMA,
+	BAYER,
+	MEDLEY;
 }
