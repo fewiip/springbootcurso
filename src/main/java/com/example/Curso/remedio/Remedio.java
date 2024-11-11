@@ -16,8 +16,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Table(name = "Remedio")
-@Entity(name = "remedios")
+@Table(name = "remedios")
+@Entity(name = "remedio")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,6 +26,7 @@ import lombok.Setter;
 public class Remedio {
 
 	public Remedio(DadosCadastroRemedio dados) {
+		this.ativo = true;
 		this.nome = dados.nome();
 		this.via = dados.via();
 		this.lote = dados.lote();
@@ -48,6 +49,8 @@ public class Remedio {
 	@Enumerated(EnumType.STRING)
 	private Laboratorio laboratorio;
 
+	private Boolean ativo;
+
 	public void atualizarInformacoes(@Valid DadosAtualizarRemedio dados) {
 		if (dados.nome() != null) {
 			this.nome = dados.nome();
@@ -61,5 +64,13 @@ public class Remedio {
 			this.laboratorio = dados.laboratorio();
 		}
 
+	}
+
+	public void inativar() {
+		this.ativo = false;
+	}
+
+	public void ativar() {
+		this.ativo = true;
 	}
 }

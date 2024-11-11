@@ -39,7 +39,8 @@ public class RemedioController {
 
 	@GetMapping
 	public List<DadosListagemRemedio> listar() {
-		return repository.findAll().stream().map(DadosListagemRemedio::new).toList();
+		return repository.findAllByAtivoTrue().stream().map(DadosListagemRemedio::new).toList();
+
 	}
 
 	@PutMapping
@@ -55,5 +56,19 @@ public class RemedioController {
 	// PathVariable: diz que o id eh o mesmo usado no path dinamico
 	public void excluir(@PathVariable Long id) {
 		repository.deleteById(id);
+	}
+
+	@DeleteMapping("inativar/{id}")
+	@Transactional
+	public void inativar(@PathVariable Long id) {
+		var remedio = repository.getReferenceById(id);
+		remedio.inativar();
+	}
+
+	@PutMapping("ativar/{id}")
+	@Transactional
+	public void ativar(@PathVariable Long id) {
+		var remedio = repository.getReferenceById(id);
+		remedio.ativar();
 	}
 }
