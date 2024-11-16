@@ -3,6 +3,7 @@ package com.example.Curso.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.Curso.remedio.DadosAtualizarRemedio;
 import com.example.Curso.remedio.DadosCadastroRemedio;
 import com.example.Curso.remedio.DadosListagemRemedio;
+import com.example.Curso.remedio.DadosDetalhamentoRemedio;
 import com.example.Curso.remedio.Remedio;
 import com.example.Curso.remedio.RemedioRepository;
 
@@ -32,23 +34,25 @@ public class RemedioController {
 
 	@PostMapping
 	@Transactional
-	public void cadastrar(@RequestBody @Valid DadosCadastroRemedio dados) {
+	public ResponseEntity<T> cadastrar(@RequestBody @Valid DadosCadastroRemedio dados) {
 		System.out.println(dados);
 		repository.save(new Remedio(dados));
 	}
 
 	@GetMapping
-	public List<DadosListagemRemedio> listar() {
-		return repository.findAllByAtivoTrue().stream().map(DadosListagemRemedio::new).toList();
+	public ResponseEntity<List<DadosListagemRemedio>> listar() {
+		var lista = repository.findAllByAtivoTrue().stream().map(DadosListagemRemedio::new).toList();
+		return ResponseEntity.ok(lista);
 
 	}
 
 	@PutMapping
 	@Transactional
-	public void atualizar(@RequestBody @Valid DadosAtualizarRemedio dados) {
+	public ResponseEntity<DadosDetalhamentoRemedio> atualizar(@RequestBody @Valid DadosAtualizarRemedio dados) {
 		var remedio = repository.getReferenceById(dados.id());
 		// acessa o banco de dados e pega os dados pelo ID
 		remedio.atualizarInformacoes(dados);
+		return ResponseEntity.ok(new DadosDetalhamentoRemedio(remedio));
 	}
 
 	@DeleteMapping("/{id}")
@@ -60,15 +64,19 @@ public class RemedioController {
 
 	@DeleteMapping("inativar/{id}")
 	@Transactional
-	public void inativar(@PathVariable Long id) {
+	public ResponseEntity<Void> inativar(@PathVariable Long id) {
 		var remedio = repository.getReferenceById(id);
 		remedio.inativar();
+
+		return ResponseEntity.noContent().build();
 	}
 
-	@PutMapping("ativar/{id}")
+	@PutMapping("reativar/{id}")
 	@Transactional
-	public void ativar(@PathVariable Long id) {
+	public ResponseEntity<Void> ativar(@PathVariable Long id) {
 		var remedio = repository.getReferenceById(id);
 		remedio.ativar();
+
+		return ResponseEntity.noContent().build();
 	}
 }

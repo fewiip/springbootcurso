@@ -24,6 +24,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Remedio {
+	//
 
 	public Remedio(DadosCadastroRemedio dados) {
 		this.ativo = true;
@@ -74,3 +75,4 @@ public class Remedio {
 		this.ativo = true;
 	}
 }
+
