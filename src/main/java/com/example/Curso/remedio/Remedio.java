@@ -19,7 +19,7 @@ import lombok.Setter;
 @Table(name = "remedios")
 @Entity(name = "remedio")
 @Getter
-@Setter
+// @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
@@ -75,4 +75,3 @@ public class Remedio {
 		this.ativo = true;
 	}
 }
-

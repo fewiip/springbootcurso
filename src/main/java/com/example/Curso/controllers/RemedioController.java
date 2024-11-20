@@ -16,8 +16,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.example.Curso.remedio.DadosAtualizarRemedio;
 import com.example.Curso.remedio.DadosCadastroRemedio;
-import com.example.Curso.remedio.DadosListagemRemedio;
 import com.example.Curso.remedio.DadosDetalhamentoRemedio;
+import com.example.Curso.remedio.DadosListagemRemedio;
 import com.example.Curso.remedio.Remedio;
 import com.example.Curso.remedio.RemedioRepository;
 
@@ -40,6 +40,7 @@ public class RemedioController {
 		System.out.println(dados);
 		var remedio = new Remedio(dados);
 		repository.save(remedio);
+		System.out.println(remedio.getId());
 		var uri = uriComponentsBuilder.path("/remedios/{id}").buildAndExpand(remedio.getId()).toUri();
 		return ResponseEntity.created(uri).body(new DadosDetalhamentoRemedio(remedio));
 	}
@@ -48,7 +49,6 @@ public class RemedioController {
 	public ResponseEntity<List<DadosListagemRemedio>> listar() {
 		var lista = repository.findAllByAtivoTrue().stream().map(DadosListagemRemedio::new).toList();
 		return ResponseEntity.ok(lista);
-
 	}
 
 	@PutMapping
@@ -57,6 +57,14 @@ public class RemedioController {
 		var remedio = repository.getReferenceById(dados.id());
 		// acessa o banco de dados e pega os dados pelo ID
 		remedio.atualizarInformacoes(dados);
+		return ResponseEntity.ok(new DadosDetalhamentoRemedio(remedio));
+	}
+
+	@GetMapping("/{id}")
+	// PathVariable: diz que o id eh o mesmo usado no path dinamico
+	public ResponseEntity<DadosDetalhamentoRemedio> detalhar(@PathVariable Long id) {
+		// repository.deleteById(id);
+		var remedio = repository.getReferenceById(id);
 		return ResponseEntity.ok(new DadosDetalhamentoRemedio(remedio));
 	}
 
