@@ -24,4 +24,38 @@ public class Usuario {
 	private Long id;
 	private String login;
 	private String senha;
+
+	@Override
+	public String getUsername() {
+		return null;
+	}
+
+	@Override
+	public String getPassword() {
+		return null;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return false;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+
+		return false;
+	}
+
+	@Override
+	public boolean isCredentialNonExpired() {
+
+		return false;
+	}
+
+	@Override
+	public boolean isEnabled() {
+
+		return false;
+	}
+
 }
