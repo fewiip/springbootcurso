@@ -1,7 +1,6 @@
 package com.example.Curso.usuarios;
 
 import java.awt.List;
-import java.util.Collections;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
