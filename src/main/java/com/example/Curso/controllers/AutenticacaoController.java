@@ -20,6 +20,8 @@ public class AutenticacaoController {
 	@Autowired
 	private AuthenticationManager manager;
 
+	int teste = 11;
+
 	@PostMapping
 	public ResponseEntity<?> efetuarLogin(@RequestBody @Valid DadosAutenticacao dados) {
 		var token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
