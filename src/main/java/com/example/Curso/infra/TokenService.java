@@ -13,7 +13,7 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 public class TokenService {
 	public String gerarToken() {
 		try {
-			Algorithm algorithm = Algorithm.RSA256(rsaPublicKey, rsaPrivateKey);
+			Algorithm algorithm = Algorithm.RSA256(RSAPublicKey, RSAPrivateKey);
 			String token = JWT.create().withIssuer("auth0").sign(algorithm);
 		} catch (JWTCreationException exception) {
 		}
