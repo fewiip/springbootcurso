@@ -1,6 +1,7 @@
 package com.example.Curso.usuarios;
 
-import java.awt.List;
+//import java.awt.List;
+import java.util.List;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -31,6 +32,13 @@ public class Usuario implements UserDetails {
 	private Long id;
 	private String login;
 	private String senha;
+
+	/*
+	 * @Override
+	 * public Collection<? extends GrantedAuthority> getAuthorities() {
+	 * return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+	 * }
+	 */
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

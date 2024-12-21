@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.Curso.infra.TokenService;
 import com.example.Curso.usuarios.DadosAutenticacao;
 
 import jakarta.validation.Valid;
@@ -20,7 +21,8 @@ public class AutenticacaoController {
 	@Autowired
 	private AuthenticationManager manager;
 
-	int teste = 11;
+	@Autowired
+	private TokenService tokenService;
 
 	@PostMapping
 	public ResponseEntity<?> efetuarLogin(@RequestBody @Valid DadosAutenticacao dados) {
