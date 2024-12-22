@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Curso.infra.TokenService;
 import com.example.Curso.usuarios.DadosAutenticacao;
+import com.example.Curso.usuarios.Usuario;
 
 import jakarta.validation.Valid;
 
@@ -28,6 +29,8 @@ public class AutenticacaoController {
 	public ResponseEntity<?> efetuarLogin(@RequestBody @Valid DadosAutenticacao dados) {
 		var token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
 		var autenticacao = manager.authenticate(token);
-		return ResponseEntity.ok().build();
+		System.out.println("senha digitada: " + dados.senha());
+
+		return ResponseEntity.ok(tokenService.gerarToken((Usuario) autenticacao.getPrincipal()));
 	}
 }

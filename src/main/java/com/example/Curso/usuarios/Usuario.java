@@ -46,36 +46,33 @@ public class Usuario implements UserDetails {
 	}
 
 	@Override
-	public String getUsername() {
-		return null;
+	public String getPassword() {
+		return senha;
 	}
 
 	@Override
-	public String getPassword() {
-		return null;
+	public String getUsername() {
+		return login;
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-
-		return false;
+		return true;
 	}
 
 }

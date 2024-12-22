@@ -27,6 +27,7 @@ public class TokenService {
 
 	public String gerarToken(Usuario usuario) {
 		try {
+			System.out.println("senha: " + usuario.getSenha());
 			var algorithm = Algorithm.HMAC256("123456");
 			return JWT.create().withIssuer("Remedios_api").withSubject(usuario.getLogin())
 					.withExpiresAt(dataExpiracao()).sign(algorithm);
