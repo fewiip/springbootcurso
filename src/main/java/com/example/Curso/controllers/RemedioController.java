@@ -28,6 +28,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/remedios")
 public class RemedioController {
 
+	String felipe = "felipe";
 	// chamado injecao de dependencias
 	// asim eu posso usar os metodos ja implementados pelo repository
 	@Autowired
