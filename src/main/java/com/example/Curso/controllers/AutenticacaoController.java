@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.Curso.infra.DadosTokenJWT;
 import com.example.Curso.infra.TokenService;
 import com.example.Curso.usuarios.DadosAutenticacao;
 import com.example.Curso.usuarios.Usuario;
@@ -31,6 +32,12 @@ public class AutenticacaoController {
 		var autenticacao = manager.authenticate(token);
 		System.out.println("senha digitada: " + dados.senha());
 
-		return ResponseEntity.ok(tokenService.gerarToken((Usuario) autenticacao.getPrincipal()));
+		var tokenJWT = tokenService.gerarToken((Usuario) autenticacao.getPrincipal());
+
+		return ResponseEntity.ok(new DadosTokenJWT(tokenJWT));
+
+		// return ResponseEntity.ok(tokenService.gerarToken((Usuario)
+		// autenticacao.getPrincipal()));
+
 	}
 }
