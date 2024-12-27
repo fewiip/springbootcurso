@@ -10,6 +10,8 @@ public class CursoApplication {
 	// public static String = "teste";
 
 	public static void main(String[] args) {
+		String felipe = "felipe";
+
 		SpringApplication.run(CursoApplication.class, args);
 	}
 
