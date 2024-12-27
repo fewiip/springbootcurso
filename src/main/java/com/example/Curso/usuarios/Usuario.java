@@ -18,8 +18,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "Usuario")
-@Entity(name = "usuarios")
+@Table(name = "usuarios")
+@Entity(name = "Usuario")
 @Getter
 // @Setter
 @NoArgsConstructor
@@ -52,6 +52,10 @@ public class Usuario implements UserDetails {
 
 	@Override
 	public String getUsername() {
+		return login;
+	}
+
+	public String getLogin() {
 		return login;
 	}
 
