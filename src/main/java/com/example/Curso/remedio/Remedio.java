@@ -14,7 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+//import lombok.Setter;
 
 @Table(name = "remedios")
 @Entity(name = "remedio")
@@ -46,11 +46,10 @@ public class Remedio {
 	private String lote;
 	private int quantidade;
 	private LocalDate validade;
+	private Boolean ativo;
 
 	@Enumerated(EnumType.STRING)
 	private Laboratorio laboratorio;
-
-	private Boolean ativo;
 
 	public void atualizarInformacoes(@Valid DadosAtualizarRemedio dados) {
 		if (dados.nome() != null) {
@@ -73,5 +72,17 @@ public class Remedio {
 
 	public void ativar() {
 		this.ativo = true;
+	}
+
+	public Long getId() {
+		return this.id;
+	}
+
+	public String getNome() {
+		return this.nome;
+	}
+
+	public Via getVia() {
+		return this.via;
 	}
 }
